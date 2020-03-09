@@ -11,6 +11,9 @@
 <a href="../../pulls"><img src="https://img.shields.io/github/issues-pr/IL0co/LR-Hint-Overlay?style=flat-square" /></a> 
 </p>
 
+## Supported games
+* only CS:GO
+
 ## Description
 * This module shows the overlay in the hint when a player has changed their rank in LR statistics.
 ## Preview
