@@ -1,0 +1,19 @@
+﻿"Phrases"
+{
+	"plus"
+	{
+		"en"			"[+]"
+	}
+	"minus"
+	{
+		"en"			"[-]"
+	}
+	
+	"Overlay_MenuName"
+	{
+		"#format"	"{1:t}"	// Phrases "plus" of "minus"
+		"en"			"{1} Hint Overlay"
+		"ru"			"{1} Хинт оверлей"
+		"ua"			"{1} Хінт оверлей"
+	}
+}
