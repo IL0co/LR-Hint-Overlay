@@ -23,10 +23,13 @@ public void OnPluginStart()
 {
 	GetConVarString(FindConVar("sv_downloadurl"), URL, sizeof(URL));
 
-	if(URL[strlen(URL)-1] != '/')
-		Format(URL, sizeof(URL), "%s/", URL);
+	if(URL[0])
+	{
+		if(URL[strlen(URL)-1] != '/')
+			Format(URL, sizeof(URL), "%s/", URL);
 
-	Format(URL, sizeof(URL), "%smaterials/panorama/images/icons/skillgroups/skillgroup", URL);
+		Format(URL, sizeof(URL), "%smaterials/panorama/images/icons/skillgroups/skillgroup", URL);
+	}
 
 	if(LR_IsLoaded())
 		LR_OnCoreIsReady();
