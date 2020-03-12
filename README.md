@@ -23,6 +23,7 @@
 
 ## Requirements
 * [LR Core](https://github.com/levelsranks/levels-ranks-core)
+* [Intermediary FakeRank](https://hlmod.ru/resources/intermediary-fakerank.1568/)
 
 ## Installation Instructions
 1. Drop all files on to the server folder

@@ -4,6 +4,7 @@
 #include <sdktools>
 #include <clientprefs>
 #include <lvl_ranks>
+#include <IFR>
 
 public Plugin myinfo = 
 {
@@ -14,23 +15,12 @@ public Plugin myinfo =
 	url			= "https://github.com/IL0co"
 }
 
-static char URL[256];
 KeyValues kv;
 bool iEnable[MAXPLAYERS+1];
 Handle g_hCookie;
 
 public void OnPluginStart()
 {
-	GetConVarString(FindConVar("sv_downloadurl"), URL, sizeof(URL));
-
-	if(URL[0])
-	{
-		if(URL[strlen(URL)-1] != '/')
-			Format(URL, sizeof(URL), "%s/", URL);
-
-		Format(URL, sizeof(URL), "%smaterials/panorama/images/icons/skillgroups/skillgroup", URL);
-	}
-
 	if(LR_IsLoaded())
 		LR_OnCoreIsReady();
 
@@ -74,23 +64,19 @@ void LR_OnMenuItemSelected(LR_MenuType OnMenuCreated, int client, const char[] s
 	if(strcmp(sInfo, "Overlays") == 0)
 	{
 		iEnable[client] = !iEnable[client];
+		SetClientCookie(client, g_hCookie, iEnable[client] ? "1" : "0");
 		LR_ShowMenu(client, LR_SettingMenu);
 	}
 }
 
 void OnLevelChanged(int client, int iNewLevel, int iOldLevel)
 {
-	if(iEnable[client])
-	{
-		PrintHintText(client, "<font> <img src='%s%i.png' /></font>", URL, iNewLevel);
-		CreateTimer(0.5, Timer_Delay, GetClientUserId(client));
-	}
-}
+	if(!iEnable[client])
+		return;
 
-public Action Timer_Delay(Handle timer, any client)
-{
-	client = GetClientOfUserId(client);
-	PrintHintText(client, "<font> <img src='%s%i.png' /></font>", URL, LR_GetClientInfo(client, ST_RANK));
+	char buff[16];
+	Format(buff, sizeof(buff), "%i", iNewLevel);
+	IFR_ShowHintFakeRank(client, kv.GetNum(buff));
 }
 
 public void OnClientCookiesCached(int client)
